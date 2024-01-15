@@ -1,0 +1,105 @@
+/*!******************************************************************************************************************************************************************************!*\
+  !*** css ../node_modules/css-loader/dist/cjs.js!../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!../node_modules/sass-loader/dist/cjs.js!./index.scss ***!
+  \******************************************************************************************************************************************************************************/
+@font-face {
+  font-family: "Roboto";
+  src: url(fc2b5060f7accec5cf74.ttf) format("truetype");
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  animation: appearance 1s forwards;
+}
+.wrapper > .background {
+  z-index: -2;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -o-object-fit: cover;
+     object-fit: cover;
+  filter: blur(4px);
+}
+.wrapper > .background.current {
+  z-index: -1;
+  animation: appearance 0.5s forwards;
+}
+
+.title {
+  color: orangered;
+  font-size: 3rem;
+}
+
+.items-list {
+  display: flex;
+}
+.items-list .button {
+  margin-right: 20px;
+  cursor: pointer;
+  border: grey 1px solid;
+  border-radius: 1rem;
+  overflow: hidden;
+  max-width: 250px;
+  width: 100%;
+  height: 250px;
+  position: relative;
+  transition: all 0.4s ease;
+  z-index: 3;
+}
+.items-list .button:last-child {
+  margin-right: 0;
+}
+.items-list .button:hover .svg {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.items-list .button > .background {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: 0.3s;
+}
+.items-list .button > .svg {
+  z-index: 2;
+  width: 65px;
+  height: 65px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+}
+
+.animate-appearance {
+  animation: appearance 1s forwards;
+}
+
+@keyframes appearance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

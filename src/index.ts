@@ -1,25 +1,20 @@
 import "./index.scss";
+import app from "./data"
 
-const app = {
-  items: [
-    { id: 1, icon: "sun.svg", sound: "summer.mp3", bg: "summer-bg.jpg", color: "orangered" },
-    { id: 2, icon: "cloud-rain.svg", sound: "rain.mp3", bg: "rainy-bg.jpg", color: "plum" },
-    { id: 3, icon: "cloud-snow.svg", sound: "winter.mp3", bg: "winter-bg.jpg", color: "darkolivegreen" }
-  ],
-  selectedId: 1,
-  audio: new Audio()
-};
+type MyEvent = Event & {
+  target: HTMLInputElement
+}
 
-function selectSound(event) {
+function selectSound(event: MyEvent) {
   event.preventDefault();
   const currentButton = document.querySelector(`#button-${app.selectedId}`);
-  const currentSvg = currentButton.querySelector(".svg");
-  const currentItem = app.items.find(item => item.id === app.selectedId);
+  const currentSvg = currentButton.querySelector<HTMLImageElement>(".svg");
+  const currentItem = app.item.find(item => item.id === app.selectedId);
   const currentBackground = document.querySelector(`#bg-${currentItem.id}`);
-  const button = event.target.closest(".button");
-  const svg = button.querySelector(".svg");
-  const id = +button.dataset.id;
-  const item = app.items.find(item => item.id === id);
+  const button = event.target.closest<HTMLButtonElement>(".button");
+  const svg = button.querySelector<HTMLImageElement>(".svg");
+  const id: number = +button.dataset.id;
+  const item = app.item.find(item => item.id === id);
   const background = document.querySelector(`#bg-${item.id}`);
 
   if (app.selectedId !== id) {
@@ -39,8 +34,9 @@ function selectSound(event) {
   }
 }
 
-function volumeSound(event) {
-  app.audio.volume = event.target.value / 100;
+function volumeSound(event: MyEvent) {
+  const volume = +event.target.value;
+  app.audio.volume = volume / 100;
 }
 
 function displayApp() {
@@ -49,7 +45,7 @@ function displayApp() {
   <div class="wrapper">
     <h1 class="title">Weather sound</h1>
     <div class="items-list">
-    ${app.items
+    ${app.item
       .map(
         item =>
           `
@@ -62,7 +58,7 @@ function displayApp() {
       .join("")}
     </div>
     <input type="range" class="input">
-    ${app.items.map(item => `<img src="./assets/${item.bg}" class="background" id="bg-${item.id}">`).join("")}
+    ${app.item.map(item => `<img src="./assets/${item.bg}" class="background" id="bg-${item.id}">`).join("")}
   </div>
   `;
 }
